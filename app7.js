@@ -411,9 +411,10 @@ app.post("/navicomplete",function(req,res){
     })*/
     Dispatch.find({driver:req.user._id},"orders",function(err, ress) {
         
-        var tmp1=JSON.stringify(ress).split(":")
+        var tmp1=JSON.stringify(ress).split(":")[2].toString()
+        var tmp2=tmp1.substring(1,(tmp1.length-3))
         console.log("orders to be deleted are")
-        console.log(ress)
+        console.log(tmp2)
         Order.findByIdAndRemove({_id:ress},function(err){
        if(err){
           
