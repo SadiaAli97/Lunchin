@@ -413,9 +413,10 @@ app.post("/navicomplete",function(req,res){
         
         var tmp1=JSON.stringify(ress).split(":")[2].toString()
         var tmp2=tmp1.substring(1,(tmp1.length-3))
+        var tmp3=tmp2.split(",")
         console.log("orders to be deleted are")
-        console.log(tmp2)
-        Order.findByIdAndRemove({_id:ress},function(err){
+        console.log(tmp3)
+        Order.findByIdAndRemove({_id:tmp3},function(err){
        if(err){
           
            console.log(err);

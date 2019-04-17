@@ -29,12 +29,21 @@
     
 </nav>
 <br/><br/><br/><br/>
-<h1>SIGNUP FOR DELIVERY BOY!</h1>
+<div class="container">
+<h1 class="a">SIGNUP FOR DELIVERY BOY!</h1>
+<div class="b">
 <form action="/deliregister" method="POST">
+    <label>Username:
     <input type="text" name="username" placeholder="username"><br/>
+    </label>
+    <label>Password:
     <input type="password" name="password" placeholder="password"><br/>
-    
+    </label>
+    <label>Phonenumber:
     <input type="text" name="pno" placeholder="Phone Number"><br/>
+    </label>
     <button>submit</button>
 </form>
+</div>
+</div>
 <% include ./partials/footer %>
