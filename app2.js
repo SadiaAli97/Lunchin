@@ -13,8 +13,19 @@ var express     =require("express"),
       Order=require("./models/order"),
     Chef=require("./models/chef");//chef
 const methodOverride = require('method-override');    
-    
-mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
+var Dispatch=require("./models/dispatch");
+var Driver=require("./models/deliver");
+var driverarr= new Array();
+var g1 =new Array();
+var g2 =new Array();
+var g3 = new Array();
+var dispatched1= new Array()
+var dispatched2= new Array()
+var dispatched3= new Array()
+
+
+mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
+// mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
@@ -43,6 +54,22 @@ app.use(function(req,res,next){
 });
  
  
+var today = new Date()
+    var t=today.toLocaleString('en-US', {timeZone: "Asia/Kolkata"})
+    //var t=new Date(Date.now()).toLocaleString();
+    var time=t[19]
+    console.log(time)
+    if(t[12]!=":"){
+      var str=t[11]+t[12]
+      var hours=parseInt(str)
+    }
+    else{
+        var str=t[11]
+        var hours=parseInt(str)
+    }
+    console.log(t)
+    console.log(hours)
+    
 app.get("/",function(req, res){
    res.render("landing2");//landing2 is for chef
 });   
@@ -137,7 +164,7 @@ app.get("/chefp",function(req, res) {   //chef preparing
           console.log(order)
       }) 
     
-        res.render("chefp",{orders:orders});
+        res.render("chefp",{orders:orders,hours:hours});
     })
 })
 app.get("/changestatus",function(req,res){
@@ -152,13 +179,11 @@ app.get("/changestatus",function(req,res){
             cart=new Cart(order.cart);
             order.items=cart.generateArray();
         });
-      /*Order.update({}, { ostatus: "Dispatched"}, {multi : true}, function(err,order){
-          if(err){
-              console.log(err)
-          }
-      }) 
-    */
-        res.render("changestatus",{orders:orders});
+      
+      finddriver()
+      setSource();
+      startalgo();
+        res.render("changestatus",{orders:orders,hours:hours});
   });
 });
 app.get("/Currentdishes",function(req,res){
@@ -228,8 +253,209 @@ app.post("/signupchef",function(req,res){
    });
 });
 
+function finddriver()
+{
+console.log("Hello")
+Driver.find({available:"true"},"_id",function(err,results){
+    for(var i=0;i<results.length;i++){
+        var stringifyd = JSON.stringify(results[i]).split(":")[1].substring(1,25).toString();
+        driverarr.push(stringifyd);
+    }
+    
+console.log("Drivers");    
+console.log(driverarr);
+})
+}
+function setSource(){
+Order.find({pincode:560078},"_id",function(err,orders){
+        if(err){
+            console.log(err)
+        };
+        for(var i=0;i<orders.length;i++){
+        var stringifyd = JSON.stringify(orders[i]).split(":")[1].substring(1,25).toString();
+        g1.push(stringifyd);
+    }
+        
+        console.log("g1 is");
+        console.log(g1)
+        
+})
 
+Order.find({pincode:560023},"_id",function(err,orders){
+        if(err){
+            console.log(err)
+        };
+          for(var i=0;i<orders.length;i++){
+        var stringifyd = JSON.stringify(orders[i]).split(":")[1].substring(1,25).toString();
+        g2.push(stringifyd);
+    }
+        
+        console.log("g2 is");
+        console.log(g2)
+})
+
+Order.find({pincode:560100},"_id",function(err,orders){
+        if(err){
+            console.log(err)
+        };
+        for(var i=0;i<orders.length;i++){
+        var stringifyd = JSON.stringify(orders[i]).split(":")[1].substring(1,25).toString();
+        g3.push(stringifyd);
+    }
+        console.log("g3 is");
+        console.log(g3)
+})
+
+
+
+
+}
+
+
+function startalgo() {
+      //do something, some commands
+    console.log("driver in algo is")
+    console.log(driverarr)
+      
+    if(g1.length && driverarr.length){
+	    if(g1.length>10){
+      dispatched1=g1.slice(0,10);
+      if(g1.length){
+      g1=g1.slice(10);
+      }
+	    }
+	    else{
+	        dispatched1=g1
+	        g1=[]
+	    }
+	   console.log("in algo g1")
+      console.log(g1)
+      console.log("dispatched in algo")
+      console.log(dispatched1)
+      Order.update({_id:dispatched1},{ostatus:"Dispatched"},{multi:true},function(err,dorders){
+          
+      })
+      
+        console.log("Driver is")
+       
+        var cdriver=driverarr[0]
+       driverarr.splice(0,1);
+       console.log("Remaining drivers are:");
+       console.log(driverarr);
+              var newdispatch={orders:dispatched1,driver:cdriver};
+              console.log("Newly dispatched order is")
+              console.log(newdispatch)
+              
+             Driver.update({_id:cdriver},{available:"false"},function(err,dorders){
+          
+      })
+             Dispatch.create(newdispatch,function(err,newlycreated){
+             if(err){
+               console.log(err);
+             }
+            else{
+            console.log("Orders to be dispatched are with driver are")
+               console.log(newlycreated)
+             
+        }
+    })
+    
+    }
+  
+    if(g2.length && driverarr.length){
+	    if(g2.length>10){
+      dispatched1=g2.slice(0,10);
+      if(g2.length){
+      g2=g2.slice(10);
+      }
+	    }
+	    else{
+	        dispatched1=g2
+	        g2=[]
+	    }
+	    
+	  
+	    
+	   
+      
+      Order.update({_id:dispatched1},{ostatus:"Dispatched"},{multi:true},function(err,dorders){
+          
+      })
+      
+        console.log("Driver is")
+       
+        var cdriver=driverarr[0]
+       driverarr.splice(0,1);
+       console.log("Remaining drivers are:");
+       console.log(driverarr);
+              var newdispatch={orders:dispatched1,driver:cdriver};
+              console.log("Newly dispatched order is")
+              console.log(newdispatch)
+                  Driver.update({_id:cdriver},{available:"false"},function(err,dorders){
+          
+      }) 
+             
+             Dispatch.create(newdispatch,function(err,newlycreated){
+             if(err){
+               console.log(err);
+             }
+            else{
+            console.log("Orders to be dispatched are with driver are")
+               console.log(newlycreated)
+             
+        }
+    })
+    
+    }
+    
+    if(g3.length && driverarr.length){
+	    if(g3.length>10){
+      dispatched1=g3.slice(0,10);
+      if(g3.length){
+      g3=g3.slice(10);
+      }
+	    }
+	    else{
+	        dispatched1=g3
+	        
+	        g3=[]
+	    }
+	    
+	  
+	    
+	   
+      
+      Order.update({_id:dispatched1},{ostatus:"Dispatched"},{multi:true},function(err,dorders){
+          
+      })
+      
+        console.log("Driver is")
+       
+        var cdriver=driverarr[0]
+       driverarr.splice(0,1);
+       console.log("Remaining drivers are:");
+       console.log(driverarr);
+              var newdispatch={orders:dispatched1,driver:cdriver};
+              console.log("Newly dispatched order is")
+              console.log(newdispatch)
+              
+                  Driver.update({_id:cdriver},{available:"false"},function(err,dorders){
+          
+      })
+             Dispatch.create(newdispatch,function(err,newlycreated){
+             if(err){
+               console.log(err);
+             }
+            else{
+            console.log("Orders to be dispatched are with driver are")
+               console.log(newlycreated)
+             
+        }
+    })
+    
+    }
+ }
 
 app.listen(process.env.PORT,process.env.IP,function(){
-    console.log("its swiggy bitches");
+    console.log("lunch in app started");
 });

@@ -15,8 +15,8 @@ var express     =require("express"),
      Order=require("./models/order");   
    
   
-    
-mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
+// mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
@@ -393,5 +393,5 @@ app.post("/signupchef",function(req,res){
 
 
 app.listen(process.env.PORT,process.env.IP,function(){
-    console.log("its swiggy bitches");
+    console.log("lunch in app started");
 });

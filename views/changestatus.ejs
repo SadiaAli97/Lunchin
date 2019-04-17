@@ -22,6 +22,7 @@
     <div class="col-md-8 col-md-offset-2">
         <h1> ORDERS READY TO BE DISPATCHED </h1>
         
+        <% if( hours>11) {%>
         <% orders.forEach(function(orders){%>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -45,7 +46,7 @@
             </div>
             <% }) %>
             
-            <a href="/changestatus" role="button" onclick="lol()" class="badge">DISPATCH</a>
+            
             
     
             
@@ -55,6 +56,10 @@
                   
     </div>
 </div>
+<%  }else { %>
+                       
+                       <h4>Orders will be placed after 11:00 am</h4>
+                       <%  } %>
 
 </body>
 </html>

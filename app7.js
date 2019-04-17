@@ -5,7 +5,8 @@ var  app=express();
 var   bodyParser =require("body-parser");
 var mongoose    =require("mongoose");
 var newdispatch;
-mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
+// mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
@@ -20,9 +21,7 @@ var driverarr= new Array();
 var g1 =new Array();
 var g2 =new Array();
 var g3 = new Array();
-var g1old=new Array();
-var g2old=new Array();
-var g3old=new Array();
+
 var dispatched1= new Array()
 var dispatched2= new Array()
 var dispatched3= new Array()
@@ -125,7 +124,6 @@ function startalgo() {
 	    }
 	    else{
 	        dispatched1=g1
-	        g1old=dispatched1;
 	        g1=[]
 	    }
 	   console.log("in algo g1")
@@ -171,7 +169,6 @@ function startalgo() {
 	    }
 	    else{
 	        dispatched1=g2
-	        g2old=dispatched1;
 	        g2=[]
 	    }
 	    
@@ -412,11 +409,11 @@ app.post("/navicomplete",function(req,res){
     Dispatch.find({driver:req.user._id},"orders",function(err, ress) {
         
         var tmp1=JSON.stringify(ress).split(":")[2].toString()
-        var tmp2=tmp1.substring(1,(tmp1.length-3))
+        var tmp2=tmp1.substring(1,(tmp1.length-3)).toString()
         var tmp3=tmp2.split(",")
         console.log("orders to be deleted are")
         console.log(tmp3)
-        Order.findByIdAndRemove({_id:tmp3},function(err){
+        Order.deleteMany({_id:tmp3},function(err){
        if(err){
           
            console.log(err);
@@ -447,5 +444,5 @@ app.post("/navicomplete",function(req,res){
 })
 
 app.listen(process.env.PORT,process.env.IP,function(){
-    console.log("its swiggy bitches");
+    console.log("lunch in app started");
 });
