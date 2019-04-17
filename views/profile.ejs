@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>LUNCHIN'</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+        <style>
+            .menu-header{
+                color: white;
+                margin:20;
+                padding:20;
+            }
+        </style>
+    </head>
+    <body>
+     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">LUNCHIN'!</a>
+          </div>
+           <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                 
+                   <li> <a href="/cart">Cart</a></li>
+                   <li> <a href="/profile">Profile</a></li>
+                   <li><a href="/cust_mainpage">Menu</a></li>
+                 
+                  
+                   <li> <a href="/logout">Logout</a></li>
+                   
+                
+               </ul>
+               
+           </div>
+      </div>
+    
+</nav>
+ 
+     <br/><br/><br/>
+     <div class="container">
+<br/><br/>  
+    
+ 		<h1>PROFILE:</h1>
+		
+    
+    <br/>
+    <div><b>USERNAME :</b> <%= currentUser.username %> </div>
+    <br/>
+    <div><b>PHONE NUMBER:</b> <%= currentUser.pno %> </div>
+    <br/>
+    <div><b>EMAIL: </b><%= currentUser.email %></div>
+    <br/>
+    <div><b>ADDRESS LINE 1 :</b> <%= currentUser.ad1 %>  </div>
+    <br/>
+    <div><b>ADDRESS LINE 2 :</b>  <%= currentUser.ad2 %> </div>
+    <br/>
+    <div><b>PIN:</b>  <%= currentUser.pin %> </div>
+    
+    
+    
+ </div>   
+    
+    
+
+ 
+   
+<% include partials/footer %>
+    
+    
+    
+    

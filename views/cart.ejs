@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<style type="text/css">
+ .close{
+  position=absolute;
+  top:15px;
+  right:30px;
+  transition:all 200ms;
+  fontsize:30px;
+  font-weight: bold;
+  text-decoration:none;
+  color:black;
+  
+ }
+ .close :hover{ color:red; }
+ 
+</style>
+	</head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">LUNCHIN'!</a>
+          </div>
+           <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                 
+                   <li> <a href="/cart">Cart</a></li>
+                   <li> <a href="/profile">Profile</a></li>
+                   <li><a href="/cust_mainpage">Menu</a></li>
+                 
+                  
+                   <li> <a href="/logout">Logout</a></li>
+                   
+                
+               </ul>
+               
+           </div>
+      </div>
+    
+</nav>
+<br/><br/><br/>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Items in your cart</h1>
+    </div>
+
+
+<%if(products){%>
+<div class="row">
+ <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+ <ul class="list-group">
+ 	<% products.forEach(function(products){%>
+ <li class="list-group-item">
+ <a href="/remove/<%= products.item._id %>" class="close"> &times</a>
+ <img src="<%= products.item.image%>" width=200>
+ <strong> <%= products.item.name%> </strong>
+ <span class="label label-success">₹ <%= products.price%></span>
+ <div class="btn-group">
+
+
+<a href="/reduce/<%= products.item._id %>" role="button"> -</a>
+<span class="badge"><%= products.qty %></span>
+<a href="/addone/<%= products.item._id %>" role="button"> +</a>
+</div>
+</li>
+ <% }) %>
+ </ul>
+ <br/><br/><br/><br/><br/>
+ </div>
+ </div>
+
+ <div class="row">
+ <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+
+ <label><strong>Total:<%= totalPrice %></strong></label>
+ </div>
+ </div>
+ <hr>
+
+
+ <div class="row">
+ <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+ <a type="button" href="/payment" class="btn btn-success" >Checkout</a>
+ <!--<button type="submit" formtarget="/payment">Place Order</button>-->
+ </div>
+ </div>
+
+<% } else { %>
+ <div class="row">
+ <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+<h2> No Items In Cart</h2>
+ </div>
+ </div>
+ <% } %>
+
+</body>
+</html>
+
+
+

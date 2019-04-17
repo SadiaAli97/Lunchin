@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>LUNCHIN'</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+     
+    </head>
+    <body>
+     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">LUNCHIN'!</a>
+          </div>
+           <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                  
+                   
+                   
+                     <li> <a href="/logoutdeliver">Logout</a></li>
+                  
+                  
+               </ul>
+               
+           </div>
+      </div>
+    
+</nav>
+
+<br/><br/><br/><br/>
+
+
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1> Orders to be delivered</h1>
+        <form action="/navicomplete" method="post">
+            <input height="30px" width="50px" type="submit" value="All orders delivered"/>
+        </form>
+    
+        
+                          
+                  
+    </div>
+</div>
+
+
+<% include ./partials/footer %>

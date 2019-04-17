@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>LUNCHIN'</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+        <style type="text/css">
+            body{
+                background-image:url("https://data.whicdn.com/images/74576880/superthumb.jpg?t=1377496888");
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% newdish.forEach(function(newdish){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                   <img src="<%= newdish.image %>">
+                   <div class="caption">
+                       <h4><%= newdish.name %></h4>
+                       <h4>₹<%= newdish.price %></h4>
+                      <a class="btn btn-primary btn-large" href="/Currentdishes/<%=newdish._id%>">delete</a>
+                   </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+</body>
+</html>

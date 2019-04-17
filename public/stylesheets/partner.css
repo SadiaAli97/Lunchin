@@ -1,0 +1,54 @@
+
+  
+ 
+  
+ 
+  
+  
+  
+  
+  
+  
+ 
+  .split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color: #ffdb58;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-color:#FFF8DC;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.container {
+   margin:0 auto; /* this will center the page */
+   width:960px; /*  use your width here */
+}
+

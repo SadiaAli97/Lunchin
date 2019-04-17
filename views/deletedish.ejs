@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>LUNCHIN'</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+     
+    </head>
+     <body>
+     
+<br/><br/><br/><br/>
+    
+
+<div class=container>
+<h1 class="a">THIS IS WHERE YOU DELETE A DISH!</h1>
+
+<p><%=newdish.name%></p>
+
+
+
+
+<form  action="/Currentdishes/<%=newdish._id%>?_method=DELETE" method="POST" >
+        <button type="text" name="_method" value="DELETE">delete</button>
+</form>
+</div>           
+                          </body>
+</html>

@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LUNCHIN'</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+     
+    </head>
+    
+    <body>
+ <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">LUNCHIN'!</a>
+          </div>
+           <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                 
+                   <li> <a href="/cart">Cart
+                   <%if(Boolean(session.cart)){%>
+                   <span class="badge"><%= session.cart.totalQty %></span>
+                   <% } %>
+                   </a></li>
+                   <li> <a href="/profile">Profile</a></li>
+                   <li><a href="/cust_mainpage">Menu</a></li>
+                   <li> <a href="/orderstatus">Orders</a></li>
+                  
+                   <li> <a href="/logout">Logout</a></li>
+                   
+                
+               </ul>
+               
+           </div>
+      </div>
+    
+</nav>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<div class="container">
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1> My Orders </h1>
+        <% orders.forEach(function(orders){%>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                
+                
+                 <ul class="list-group">
+                     <% orders.items.forEach(function(orderitem){%>
+                  <li class="list-group-item"><%= orderitem.item.name %> | <%= orderitem.qty %>
+                   <span class="badge"><%= orderitem.price %> </span></li> 
+                  
+                   <% }) %>
+                </ul>
+                
+              <div class="panel-footer">
+                <ul class="list-group">
+                  <li class="list-group-item"><%= orders.cart.totalPrice %> 
+                   <span class="badge"><%= orders.ostatus %> </span></li> 
+                  
+                </ul>
+              </div>
+              </div>
+            </div>
+            <% }) %>
+    
+            
+         </div>
+        
+                          
+                  
+    </div>
+</div>
+</div>        
+    </body>
+</html>

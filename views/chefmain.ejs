@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Lunchin'</title>
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    * {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+#NewOrder {background-color: white;}
+#Prepare {background-color: green;}
+#All {background-color: blue;}
+#About {background-color: orange;}
+
+/* Style tab links */
+.tablink {
+  background-color: #333;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 100%;
+}
+
+
+.tablink:hover {
+  background-color: #555;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: black;
+  display: none;
+  height: 100%;
+  
+    margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding:0px 20px;
+  float: left;
+  width: 70%;
+  background-color: #f1f1f1;
+  margin-left: 200px; /*give space at right*/
+}
+
+
+		
+		article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+		ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+li.right{
+	float: right;
+	font-size: 35px;
+    margin: 10px; 
+}
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 180px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #333; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 0px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px;
+}
+.block {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding:0px 20px;
+  float: left;
+  width: 70%;
+  background-color: #f1f1f1;
+  margin-left: 200px; /*give space at right*/
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color:red;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+</style>
+<script type="text/javascript">function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = "#555";
+}
+
+// Get the element with id="defaultOpen" and click on it
+//document.getElementById("defaultOpen").click();
+
+   function load_home() {
+     document.getElementById("NewOrder").innerHTML='<object type="text/html" data="chef.ejs" ></object>';
+}
+
+   
+   
+
+
+
+
+</script>
+</head>
+<body>
+  <ul>
+ 
+
+  <li class="right"><a href="#news"><i class="fa fa-user-circle"></i>Profile</a></li>
+
+  <li class="right"><a href="#contact"><i class="fa fa-shopping-cart"></i>Cart</a></li>
+
+</ul>
+<div class="sidenav">
+  <a href="#home" ><img src="https://theenterprise.net/wp-content/uploads/2017/12/food_icon_1513792355.png" height="60px" width="50px" class="logo"><b>Lunchin'</b></a>
+  <br/><br/>
+<a role="button" class="tablink" href="/chef" target="NewOrder"  >Orders</a><br/>
+  <button class="tablink" onclick="window.location='/changestatus'" id="defaultOpen" >Ready to ship</button><br/>
+<button class="tablink" onclick="openPage('All', this, 'blue')">  View Dish</button><br/>
+<button class="tablink" onclick="window.location='/adddish'">Add new dish</button>
+
+</div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+
+<iframe name="NewOrder" class="tabcontent">
+
+     
+    
+  
+</div>
+<div id="Prepare" class="tabcontent">
+<p>helo</p>
+  
+</iframe>
+
+<div id="All" class="tabcontent">
+  <h3>View Dish</h3>
+  <div class="container">
+     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% campgrounds.forEach(function(campground){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                   <img src="<%= campground.image %>" width="200" height="200">
+                   <div class="caption">
+                       <h4><%= campground.name %></h4>
+                   </div>
+                   <p>
+                       <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info</a>
+                   </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+</div>
+
+<div id="About" class="tabcontent">
+    <a class="btn btn-primary btn-large" href="/campgrounds/new">Add New Campground</a>
+</div>
+</div>
+<script>
+function change() // no ';' here
+{
+    var elem = document.getElementById("myButton1");
+    if (elem.value=="Close Curtain") elem.value = "Open Curtain";
+    else elem.value = "Close Curtain";
+}
+</script>
+</body>
+</html>

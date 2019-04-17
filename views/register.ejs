@@ -1,0 +1,33 @@
+
+<% include ./partials/header %>
+<br/><br/><br/><br/>
+<div class="container">
+     
+<h1 class="a">SIGNUP</h1>
+
+<form action="/register" method="POST" class="form">
+    <label>Username:
+    <input type="text" name="username" placeholder="username"><br/>
+    </label>
+    <label>Password:
+    <input type="password" name="password" placeholder="password"><br/>
+    </label>
+    <label>Phone Number:
+    <input type="text" name="pno" placeholder="phone number"><br/>
+    </label>
+    <label>Email:
+    <input type="text" name="email"  placeholder="email"><br/>
+    </label>
+    <label>Address line 1:
+    <input type="text" name="ad1" placeholder="Address line 1"><br/>
+    </label>
+    <label>Address line 2:
+    <input type="text" name="ad2" placeholder="Address line 2"><br/>
+    </label>
+    <label>Pin code:
+    <input type="text" name="pin" placeholder="Pin code"><br/>
+    </label>
+    <button>submit</button>
+</form>
+
+<% include ./partials/footer %>

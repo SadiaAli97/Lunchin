@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+    </head>
+    <body>
+          <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">LUNCHIN'!</a>
+          </div>
+           <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                   <li id="save"> <a href="/profile">BACK</a></li>
+                  
+                  
+               </ul>
+               
+           </div>
+      </div>
+    
+</nav>
+<br/><br/><br/><br/>
+        
+        <h1>EDIT PROFILE</h1>
+<form action="/editpro" method="POST">
+    <input type="text" value="<%= currentUser.username %> " name="username" onfocus=this.blur() ><br/>
+    <input type="text" value="<%= currentUser.pno %>" name="pno"  placeholder="pno"><br/>
+    <input type="text" value="<%= currentUser.email %>" name="email"  placeholder="email" onfocus=this.select()><br/>
+    <input type="text" value="<%= currentUser.ad1 %>" name="ad1" placeholder="Address line 1"><br/>
+    <input type="text" value="<%= currentUser.ad2 %>"name="ad2" placeholder="Address line 2"><br/>
+    <input type="text" value="<%= currentUser.pin %>" name="pin" placeholder="Pin code"><br/>
+    <input type="submit">
+</form>
+        
+    </body>
+    
+</html>

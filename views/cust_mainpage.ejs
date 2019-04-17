@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LUNCHIN'</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+       
+    </head>
+    
+    <body>
+ <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">LUNCHIN'!</a>
+          </div>
+           <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                 
+                   <li> <a href="/cart">Cart
+                   <%if(Boolean(session.cart)){%>
+                   <span class="badge"><%= session.cart.totalQty %></span>
+                   <% } %>
+                   </a></li>
+                   <li> <a href="/profile">Profile</a></li>
+                   <li><a href="/cust_mainpage">Menu</a></li>
+                   <li> <a href="/orderstatus">Orders</a></li>
+                  
+                   <li> <a href="/logout">Logout</a></li>
+                   
+                
+               </ul>
+               
+           </div>
+      </div>
+    
+</nav>
+<br/><br/><br/>
+<h4 style="color:white">Orders can be placed between 7:00am and 11:00am</h4>  
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+<h2 color="white"> Meals</h2>
+<div class="scrollmenu">
+    
+  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% newdish.forEach(function(newdish){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                   <img src="<%= newdish.image %>" width=200>
+          
+                  <form method="post" action="/cust_mainpage">
+                   <div class="caption" action="cartdishes">
+      
+                       <h4 id="<%=newdish._id %>n" name="title"><%= newdish.name %></h4>
+                       <h4 id="<%=newdish._id %>p" name="price">₹<%= newdish.price %></h4>
+                       <% if(time=="A") { %>
+                       <% if( hours<11 && hours>7) {%>
+                       <a href="/add-to-cart/<%= newdish._id %>" class="btn btn-success pull-center" role="button" >Add to Cart</a>
+                       <% } }else { %>
+                       
+                       <h4>Currently unavailable</h4>
+                       <%  } %>
+                       
+                       
+                       
+                   </div>
+                   </form> 
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+ 
+</div>
+
+</body>
+</html>

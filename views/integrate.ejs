@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+  <style type="text/css">
+    #logout{
+      float:right;
+      color:white;
+      font-size:20px;
+    }
+    article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+.container {
+ 
+  border-radius: 5px;
+  background-image: url("https://img.freepik.com/free-photo/four-pink-macaroons-light-pink-background-sweet-minimal-food-concept_72751-228.jpg?size=626&ext=jpg");
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+   margin-left: auto;
+    margin-right: auto;
+  width: 50%;
+  
+  padding: 10px; 
+
+ 
+  right: 0;
+  
+  
+} 
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-image: url('black.jpg');
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: 5px;
+  height:52.7px;
+
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: rgb(209, 30, 30);
+}
+li.right{
+  float: right;
+  font-size: 35px;
+    margin: 10px; 
+}
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 180px; /* Set the width of the sidebar */
+  position: absolute; /* Fixed Sidebar (stay in place on scroll) */
+  top:-100px;
+  left: -300px;
+  
+  background-color:#0000;
+  background-image: url('black.jpg');
+  overflow-x: hidden; /* Disable horizontal scroll */
+  
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 25px;
+  color:black;/*to change color of sidenav text*/
+  display: block;
+  text-align: center;
+}
+.sidenav .single{
+  padding: 6px 6px 6px 6px;
+  text-decoration: none;
+  font-size: 22px;
+  color:#0000;
+  display: block;
+  text-align: bottom;
+}
+
+iframe{
+    top: 20px;
+    height:700px;
+    width:1000px;
+    
+
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px;
+}
+.block {
+    height:auto;
+  margin-left: 160px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding:0px 20px;
+  float: left;
+  position:absolute;
+  left:-230px;
+  top:-150px;
+  
+  width: 70%;
+  background-color: #f1f1f1;
+  margin-left: 200px; /*give space at right*/
+}
+.icon{
+
+  color: rgb(255, 255, 255);
+  background-image: url('black.jpg');
+  text-align: center;
+  padding: 10px;
+  text-transform: none;
+
+}
+
+body{
+  background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEVGGNEDNFLDh4GKn18qJC3hsxwPYflPyJnr9JcKp5P3mSSsNBVg");
+  
+  height:100%;
+  background-size: cover;
+  background-repeat:repeat;
+}
+
+h1{
+  font-family:"Comic Sans MS", cursive, sans-serif;
+}
+
+  </style>
+  <script type="text/javascript">
+      function displayme(a){
+          var addr=document.getElementById("block");
+          if(a=="c1"){
+              
+              addr.innerHTML='<iframe src="/Currentdishes" > </iframe>'
+              
+          }
+          else if(a=='c2'){
+              addr.innerHTML='<iframe src="/adddish" > </iframe>'
+          }
+          else if(a=='exp'){
+              addr.innerHTML='<iframe src="/chefp" > </iframe>'
+          }
+          else if(a=='icm'){
+              addr.innerHTML='<iframe src="/changestatus" > </iframe>'
+          }
+      }
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">LUNCHIN'!</a>
+          </div>
+           <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                   <li id="logout"> <a href="/logoutchef">Logout</a></li>
+                  
+                  
+               </ul>
+               
+           </div>
+      </div>
+    
+</nav>
+<br/><br/><br/>
+<div class="container">
+  <div class="block" id="block">
+ 
+   </div>
+    <h1> Welcome to the restaurant management page</h1>
+    <h3>
+      Here you can add new dishes, delete dishes and check the status of the prepared orders
+    </h3>
+    
+     
+
+<div class="sidenav">
+  <label class = "single"><b></b></label>
+  <br/>
+  <a id="Menu" class = "icon" onclick="displayme('c1')">Menu</a><br/>
+  <a id="Add" class = "icon" onclick="displayme('c2')">Add new dish</a><br/>
+  <a id="Preparing" class = "icon" onclick="displayme('exp')">Preparing</a><br/>
+  <a id="Dispatch" class = "icon" onclick="displayme('icm')">Dispatch</a><br/>
+</div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+</div>
+</body>
+</html>
