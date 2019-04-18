@@ -17,7 +17,7 @@ var Order=require("./models/order");
 var Driver=require("./models/deliver");
 var Cart =require("./models/cart");
 var User=require("./models/user");
-
+var addrress=new Array();
 var orders= new Array();
 var driverarr= new Array();
 var g1 =new Array();
@@ -217,7 +217,7 @@ function startalgo() {
 	    }
 	    else{
 	        dispatched1=g3
-	        g3old=dispatched1;
+	       
 	        g3=[]
 	    }
 	    
@@ -282,7 +282,7 @@ app.get("/dispatch",function(req,res){
        var n=results.length;
         var tmp=results[n-1].orders
         var stringifyd = tmp.split(",");
-        var addrress=new Array()
+        addrress=[]
        Order.find({_id:stringifyd},"address",function(err,addresses){
      
            for(var i=0;i<addresses.length;i++){
@@ -388,7 +388,7 @@ app.get("/navi",function(req,res){
 {
 var x=new Array()    
 x=["DSCE,bengaluru,India"]
-var l=x.concat(address);
+var l=x.concat(addrress);
 y="https://www.google.com/maps/dir/?api=1&origin="+l[0]+"&destination="+l[0]+"&travelmode=driving&waypoints="+l[1];
  if(l.length>=2){
 		for(var i=2;i<l.length;i++){
