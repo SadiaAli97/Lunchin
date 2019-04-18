@@ -1,0 +1,29 @@
+<% if(time=="A") { %>
+                       <% if( hours<11 && hours>7) {%>
+                       <a href="/add-to-cart/<%= newdish._id %>" class="btn btn-success pull-center" role="button" >Add to Cart</a>
+                       <% } else { %>
+                       
+                       <h4>Currently unavailable</h4>
+                       <% } } %>
+                       
+                       <% if( hours<11 && hours>7) {%>
+                       
+                       
+                       
+                       
+                       /*function load(){
+           clicked=false
+           if(clicked){
+           if(typeof(Storage) !== "undefined"){
+           localStorage.setItem("list1",b);
+	       b=localStorage.getItem("list1");
+	}
+
+else{
+	alert("error");
+}
+}
+}
+   */  <span class="badge"><%= products.qty %></span>
+   
+   

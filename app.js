@@ -63,7 +63,7 @@ app.get("/",function(req, res){
 });
 app.get("/cust_mainpage",function(req,res){
     
-    var today = new Date()
+    /*var today = new Date()
     var t=today.toLocaleString('en-US', {timeZone: "Asia/Kolkata"})
     //var t=new Date(Date.now()).toLocaleString();
     
@@ -80,7 +80,7 @@ app.get("/cust_mainpage",function(req,res){
     }
     console.log(time)
     console.log(t)
-    console.log(hours)
+    console.log(hours)*/
     
     newdish.find({},function(err,alldishes){
         
@@ -88,7 +88,7 @@ app.get("/cust_mainpage",function(req,res){
             console.log(err);
         }
         else{
-            res.render("cust_mainpage",{newdish:alldishes,hours:hours,time:time});
+            res.render("cust_mainpage",{newdish:alldishes});/*hours:hours,time:time});*/
         }
     });
 });
