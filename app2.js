@@ -77,7 +77,8 @@ app.get("/",function(req, res){
 var dishSchema = new mongoose.Schema({
     name: String,
     image: String,
-    price: String
+    price: String,
+    vegnveg:String
 
 });
 var newdish = mongoose.model("newdish", dishSchema);
@@ -86,7 +87,8 @@ app.post("/Currentdishes",function(req,res){
     var name=req.body.name;
     var image=req.body.image;
     var price=req.body.price;
-    var dish={name:name,image:image,price:price}
+    var vegnveg=req.body.vegnveg;
+    var dish={name:name,image:image,price:price,vegnveg:vegnveg}
     newdish.create(dish,function(err, newlycreated){
         if(err){
             console.log(err);

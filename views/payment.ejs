@@ -5,14 +5,30 @@
   <title>LUNCHIN'</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="/stylesheets/pay.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+        <style type="text/css">
+          body {
+  background-color: #fff;
+  background-image: url(https://www.publicdomainpictures.net/pictures/270000/nahled/background-scratched-distressed.jpg);
+  background-repeat:repeat;
+   height: 100%; 
+  
+
+}
+        </style>
+        
         <script>
+        var sel=false;
+        var address3=["13th Cross Lst Main Road Bhuvaneshwari Nagar","13th Cross V R Nagar","Agrahar Dasarahalli Magadi Road Bangalore","Agrahar Dasarhalli Magadi Road ","Agrahar Magdi Road Agrahara Police Station Bangalore","Agrahar Police Station Magadi Road Bangalore","Agrahara Magadi Road Bangalore"]
+        var address1=["arm embedded technologies,bengaluru","dell emc corporation,bangaluru","amazon development centre,aquila building,bengaluru"]
+        var address2=["artech infosystems bangalore,india","dxc technology","audi bengaluru"]
           function checkaddpin(selpin){
             var seladdd=document.getElementById("address").value;
            var seladd=seladdd.toLowerCase();
            
            var address1=["arm embedded technologies,bengaluru","dell emc corporation,bangaluru","amazon development centre,aquila building,bengaluru"]
            var address2=["artech infosystems bangalore,india","dxc technology","audi bengaluru"]
+           var address3=["13th Cross Lst Main Road Bhuvaneshwari Nagar","13th Cross V R Nagar","Agrahar Dasarahalli Magadi Road Bangalore","Agrahar Dasarhalli Magadi Road ","Agrahar Magdi Road Agrahara Police Station Bangalore","Agrahar Police Station Magadi Road Bangalore","Agrahara Magadi Road Bangalore"]
             switch(selpin)
             {
               
@@ -31,10 +47,76 @@
                              else{
                                alert("address not matching with pin");
                              }
+              case 560023 : if(address3.includes(seladd)){
+                             alert("pin and address are matching go ahead!");
+                              
+                             } 
+                             else{
+                               alert("address not matching with pin");
+                             }               
                              break;
               default     : alert("invalid pin");                   
             }
           
+          }
+          function ClearOptions()
+           {
+	            document.getElementById("mySelect").options.length = 0;
+         }
+          
+          function addopts(y){
+            
+            var x = document.getElementById("mySelect");
+            var y=document.getElementById(y).value
+            if(y=="560023"){
+              if(sel){
+              ClearOptions()
+              
+            }
+            for (var i = 0; i<address3.length; i++){
+            var opt = document.createElement('option');
+            
+            
+            opt.value = address3[i];
+            opt.innerHTML =address3[i];
+            x.appendChild(opt);
+            
+           }
+           sel=true;
+           
+            }
+            if(y=="560078"){
+              if(sel){
+              ClearOptions()
+            }
+            for (var i = 0; i<address1.length; i++){
+            var opt = document.createElement('option');
+            
+            
+            opt.value = address1[i];
+            opt.innerHTML =address1[i];
+            x.appendChild(opt);
+            
+           }
+           sel=true
+            }
+            
+            if(y=="560100"){
+              if(sel){
+              ClearOptions()
+            }
+            for (var i = 0; i<address2.length; i++){
+            var opt = document.createElement('option');
+            
+            
+            opt.value = address2[i];
+            opt.innerHTML =address2[i];
+            x.appendChild(opt);
+           
+           }
+           sel=true
+            }
+            
           }
         </script>
      </head>
@@ -79,17 +161,20 @@
            
             
            
-            <label for="cname">Address</label>
-            <input type="text" id="address" name="address" placeholder="address">
+           
             <label> select a pin</label>
            
            <label>
-             <input type="radio" name="pincode" value="560078" onclick="checkaddpin(560078)" />
+             <input type="radio" name="pincode" id="pincode1" value="560078" onclick="addopts('pincode1')" />
               560078</label>
              <label>
-             <input type="radio" name="pincode" value="560100" onclick="checkaddpin(560100)" />
+             <input type="radio" name="pincode" id="pincode2" value="560100" onclick="addopts('pincode2')" />
              560100 </label>
-             
+             <label>
+             <input type="radio" name="pincode" id="pincode3" value="560023" onclick="addopts('pincode3')" />
+             560023 </label>
+             <select id="mySelect" name="address">
+             </select>
             
             <div class="row">
               <div class="col-50">

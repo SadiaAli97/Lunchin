@@ -3,6 +3,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <style type="text/css">
  .close{
@@ -14,10 +15,36 @@
   font-weight: bold;
   text-decoration:none;
   color:black;
+ 
+      
   
  }
- .close :hover{ color:red; }
+ .close:hover{ color:red; }
  
+body {
+  background-color: #fff;
+  background-image: url(https://www.publicdomainpictures.net/pictures/270000/nahled/background-scratched-distressed.jpg);
+  background-repeat:repeat;
+   height: 100%; 
+
+}
+
+.demo{
+ text-align:center;
+ font-family:American Typewriter, serif;
+ color:white;
+ font-size:50px;
+}
+  
+.msg{
+ text-align:center;
+ font-family:American Typewriter, serif;
+ color:white;
+ font-size:50px;
+ position:relative;
+ top:150px;
+ background-color:black;
+}  
 </style>
 	</head>
     <body>
@@ -45,12 +72,12 @@
 </nav>
 <br/><br/><br/>
 <div class="container">
-    <div class="jumbotron">
-        <h1>Items in your cart</h1>
-    </div>
+   
+        <h1 class="demo">Items in your cart</h1>
+   
 
 
-<%if(products){%>
+<%if(products && session.cart.totalQty){%>
 <div class="row">
  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
  <ul class="list-group">
@@ -63,9 +90,9 @@
  <div class="btn-group">
 
 
-<a href="/reduce/<%= products.item._id %>" role="button"> -</a>
-<span class="badge"><%= products.qty %></span>
-<a href="/addone/<%= products.item._id %>" role="button"> +</a>
+<a href="/reduce/<%= products.item._id %>" role="button" style="font-size:20px"> -</a>
+<span class="badge" style="font-size:10px"><%= products.qty %></span>
+<a href="/addone/<%= products.item._id %>" role="button" style="font-size:20px"> +</a>
 </div>
 </li>
  <% }) %>
@@ -77,23 +104,25 @@
  <div class="row">
  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
 
- <label><strong>Total:<%= totalPrice %></strong></label>
+ <label><strong style="color:white">Total:<%= totalPrice %></strong></label>
  </div>
  </div>
  <hr>
 
-
+ <%if(products){%>
  <div class="row">
  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
- <a type="button" href="/payment" class="btn btn-success" >Checkout</a>
+ <a type="button" href="/payment" class="btn btn-success"  >Checkout</a>
  <!--<button type="submit" formtarget="/payment">Place Order</button>-->
  </div>
  </div>
-
+<% }  %>
 <% } else { %>
  <div class="row">
  <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+  <div class="msg">
 <h2> No Items In Cart</h2>
+</div>
  </div>
  </div>
  <% } %>
