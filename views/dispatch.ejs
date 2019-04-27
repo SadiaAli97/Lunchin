@@ -2,17 +2,20 @@
     <head>
         <title>LUNCHIN'</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/stylesheets/landing.css">
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
         <style type="text/css">
             body {
   
   background-image: url("https://userscontent2.emaze.com/images/81191429-0927-47ee-b09f-328c2e357da1/62ead03d2a9a1fdafa7be768efd3a411.jpg");
   background-repeat:no-repeat;
+  height: 100%; 
+
+  /* Center and scale the image nicely */
   background-position: center;
- 
+  background-repeat: no-repeat;
   background-size: cover;
-  
+  padding:50px;
 
   /* Center and scale the image nicely */
  
@@ -20,10 +23,21 @@
  
 }
 .demo{
+
  text-align:center;
  font-family:American Typewriter, serif;
  color:white;
  font-size:50px;
+ position:relative;
+ top:150px;
+ background-color:black;
+
+}
+.inline {
+
+   float:left;
+   margin-right:5px;
+
 }
         </style> 
     </head>
@@ -44,15 +58,15 @@
       </div>
     
 </nav>
-<br/><br/><br/><br/>
+
 
 <div class="container">
-    <br/><br/><br/>
+    
 
 <% if(orders.length){ %>
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h1>Orders to be delivered</h1>
+        <h1 style="color:white" >Orders to be delivered</h1>
         <% orders.forEach(function(orders){%>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -84,12 +98,16 @@
             </div>
             <% }) %>
     
-            <a href="/navi" role="button">Navigate to destination</a>
+            <button class="inline"><a href="/navi" role="button">Navigate to destination</a></button>
+            <&nbsp
+             <form action="/navicomplete" method="post">
+    
+            <button class="inline" height="30px" width="50px" type="submit" value="All orders delivered" >All orders delivered</button>
+           
+        </form> 
          </div>
         
-               <form action="/navicomplete" method="post">
-            <input height="30px" width="50px" type="submit" value="All orders delivered"/>
-        </form>          
+               
                   
     </div>
 </div>
@@ -100,7 +118,7 @@
     <!--<div class="container">-->
     <div class="row">
     <div class="col-md-8 col-md-offset-2">
-    <h1 class="demo" style="color: black;"><center><middle>No New Orders!</middle></center></h1>
+    <h1 class="demo"><center><middle>No New Orders!</middle></center></h1>
     
   
   

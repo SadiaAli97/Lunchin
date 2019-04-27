@@ -7,8 +7,9 @@ var mongoose    =require("mongoose");
 var newdispatch;
 // mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
 // console.log(process.env.DATABASEURL);
-var url= process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v6"; 
-mongoose.connect(url,{ useNewUrlParser: true });
+ mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
+//var url= process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v6"; 
+//mongoose.connect(url,{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
@@ -109,8 +110,8 @@ Order.find({pincode:560100},"_id",function(err,orders){
 
 
 }
-finddriver()
-setSource();
+//finddriver()
+//setSource();
 
 function startalgo() {
       //do something, some commands
@@ -281,9 +282,11 @@ app.get("/dispatch",function(req,res){
         else{
        var n=results.length;
         var tmp=results[n-1].orders
-        var stringifyd = tmp.split(",");
+        console.log("tmp is")
+        console.log(tmp)
+        //var stringifyd = tmp.split(",");
         addrress=[]
-       Order.find({_id:stringifyd},"address",function(err,addresses){
+       Order.find({_id:tmp},"address",function(err,addresses){
      
            for(var i=0;i<addresses.length;i++){
                var etee=JSON.stringify(addresses[i]).split(":")[2]
@@ -295,7 +298,7 @@ app.get("/dispatch",function(req,res){
            
        })
       
-        Order.find({_id:stringifyd},function(err,orders){
+        Order.find({_id:tmp},function(err,orders){
         if(err){
             return res.write("Error");
         };
@@ -366,7 +369,7 @@ app.post("/deliregister",function(req,res){
     }
     console.log(deliver);
        passport.authenticate("local")(req,res,function(){
-           res.redirect("/homepage2");
+           res.redirect("/chkorders");
        });
    });
 });
@@ -378,9 +381,10 @@ app.get("/chkorders",function(req,res){
 
 
 app.post("/chkorders",function(req,res){
-    startalgo();
-    console.log("chnage deployed")
-    res.redirect("/dispatch");
+    
+     res.redirect("/dispatch")
+    
+   
 })
 
 app.get("/navi",function(req,res){
@@ -412,12 +416,20 @@ app.post("/navicomplete",function(req,res){
     })*/
     Dispatch.find({driver:req.user._id},"orders",function(err, ress) {
         
-        var tmp1=JSON.stringify(ress).split(":")[2].toString()
-        var tmp2=tmp1.substring(1,(tmp1.length-3)).toString()
+        console.log("orders are")
+        console.log(ress)
+        var tmp1=ress[0].orders
+        console.log("tmp1 are")
+        console.log(tmp1)
+        /*var tmp2=tmp1.substring(1,(tmp1.length-7))
+        console.log("tmp2 are")
+        console.log(tmp2)
+        
         var tmp3=tmp2.split(",")
+        */
         console.log("orders to be deleted are")
-        console.log(tmp3)
-        Order.deleteMany({_id:tmp3},function(err){
+        console.log(tmp1)
+        Order.deleteMany({_id:tmp1},function(err){
        if(err){
           
            console.log(err);
@@ -441,7 +453,8 @@ app.post("/navicomplete",function(req,res){
     console.log("g1 is")
     console.log(g1)
     finddriver()
-    setTimeout(startalgo, 4000);
+    setTimeout(setSource, 2000);
+    setTimeout(startalgo, 3000);
     //startalgo()
     setTimeout(function(){ res.redirect("/dispatch"); }, 4000);
     }, 3000);
