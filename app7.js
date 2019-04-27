@@ -379,6 +379,7 @@ app.get("/chkorders",function(req,res){
 
 app.post("/chkorders",function(req,res){
     startalgo();
+    console.log("chnage deployed")
     res.redirect("/dispatch");
 })
 
