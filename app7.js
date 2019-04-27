@@ -8,8 +8,8 @@ var newdispatch;
 // mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
 // console.log(process.env.DATABASEURL);
  mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
-//var url= process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v6"; 
-//mongoose.connect(url,{ useNewUrlParser: true });
+var url= process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v6"; 
+mongoose.connect(url,{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
