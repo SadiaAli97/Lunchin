@@ -4,7 +4,7 @@ var dschema= new Schema({
     
   
     
-    orders:String,
+    orders:[String],
     
     driver:String
     
