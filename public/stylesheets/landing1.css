@@ -1,14 +1,4 @@
-body {
-  background-color: #fff;
-  background-image: url(https://userscontent2.emaze.com/images/81191429-0927-47ee-b09f-328c2e357da1/62ead03d2a9a1fdafa7be768efd3a411.jpg);
-  background-repeat:no-repeat;
-   height: 100%; 
 
-  /* Center and scale the image nicely */
-  background-position: center;
- 
-  background-size: cover;
-}
 label, input {
     display: block;
     

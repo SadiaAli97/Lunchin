@@ -24,8 +24,8 @@ var dispatched2= new Array()
 var dispatched3= new Array()
 
 
-mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
-// mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
+//mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
+ mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
@@ -182,9 +182,15 @@ app.get("/changestatus",function(req,res){
             order.items=cart.generateArray();
         });
       
-      finddriver()
-      setSource();
-      startalgo();
+      setTimeout(function(){
+         console.log("chnage deployed")
+
+    finddriver()
+    setTimeout(setSource, 2000);
+    setTimeout(startalgo, 3000);
+    //startalgo()
+    
+    }, 3000);
         res.render("changestatus",{orders:orders,hours:hours});
   });
 });
@@ -259,6 +265,8 @@ function finddriver()
 {
 console.log("Hello")
 Driver.find({available:"true"},"_id",function(err,results){
+    console.log("drivers in app2 are")
+    console.log(results)
     for(var i=0;i<results.length;i++){
         var stringifyd = JSON.stringify(results[i]).split(":")[1].substring(1,25).toString();
         driverarr.push(stringifyd);
@@ -269,7 +277,7 @@ console.log(driverarr);
 })
 }
 function setSource(){
-Order.find({pincode:560078},"_id",function(err,orders){
+Order.find({pincode:560078},"_id",{ limit: 10},function(err,orders){
         if(err){
             console.log(err)
         };
@@ -283,7 +291,7 @@ Order.find({pincode:560078},"_id",function(err,orders){
         
 })
 
-Order.find({pincode:560023},"_id",function(err,orders){
+Order.find({pincode:560023},"_id",{ limit: 10},function(err,orders){
         if(err){
             console.log(err)
         };
@@ -296,7 +304,7 @@ Order.find({pincode:560023},"_id",function(err,orders){
         console.log(g2)
 })
 
-Order.find({pincode:560100},"_id",function(err,orders){
+Order.find({pincode:560100},"_id",{ limit: 10},function(err,orders){
         if(err){
             console.log(err)
         };

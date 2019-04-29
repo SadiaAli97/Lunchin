@@ -18,7 +18,7 @@ var Order=require("./models/order");
 var Driver=require("./models/deliver");
 var Cart =require("./models/cart");
 var User=require("./models/user");
-var addrress=new Array();
+var addrress=new Set();
 var orders= new Array();
 var driverarr= new Array();
 var g1 =new Array();
@@ -67,7 +67,7 @@ console.log(driverarr);
 })
 }
 function setSource(){
-Order.find({pincode:560078},"_id",function(err,orders){
+Order.find({pincode:560078},"_id",{ limit: 10},function(err,orders){
         if(err){
             console.log(err)
         };
@@ -81,7 +81,7 @@ Order.find({pincode:560078},"_id",function(err,orders){
         
 })
 
-Order.find({pincode:560023},"_id",function(err,orders){
+Order.find({pincode:560023},"_id",{ limit: 10},function(err,orders){
         if(err){
             console.log(err)
         };
@@ -94,7 +94,7 @@ Order.find({pincode:560023},"_id",function(err,orders){
         console.log(g2)
 })
 
-Order.find({pincode:560100},"_id",function(err,orders){
+Order.find({pincode:560100},"_id",{ limit: 10},function(err,orders){
         if(err){
             console.log(err)
         };
@@ -285,13 +285,13 @@ app.get("/dispatch",function(req,res){
         console.log("tmp is")
         console.log(tmp)
         //var stringifyd = tmp.split(",");
-        addrress=[]
+        addrress.clear()
        Order.find({_id:tmp},"address",function(err,addresses){
      
            for(var i=0;i<addresses.length;i++){
                var etee=JSON.stringify(addresses[i]).split(":")[2]
         var ete = etee.substring(1,(etee.length-2)).toString();
-        addrress.push(ete);
+        addrress.add(ete);
     }
     console.log("addresses are")
     console.log(addrress)
@@ -391,9 +391,13 @@ app.get("/navi",function(req,res){
     var y;
     function boo()
 {
-var x=new Array()    
+var x=new Array()   
+var m =new Array()
 x=["DSCE,bengaluru,India"]
-var l=x.concat(addrress);
+for(var i=0;i<addrress.length;i++){
+    m.push(addrress[i])
+}
+var l=x.concat(m);
 y="https://www.google.com/maps/dir/?api=1&origin="+l[0]+"&destination="+l[0]+"&travelmode=driving&waypoints="+l[1];
  if(l.length>=2){
 		for(var i=2;i<l.length;i++){
