@@ -392,11 +392,11 @@ app.get("/navi",function(req,res){
     function boo()
 {
 var x=new Array()   
-var m =new Array()
+var m = Array.from(addrress);
+console.log("m")
+console.log(m)
 x=["DSCE,bengaluru,India"]
-for(var i=0;i<addrress.length;i++){
-    m.push(addrress[i])
-}
+
 var l=x.concat(m);
 y="https://www.google.com/maps/dir/?api=1&origin="+l[0]+"&destination="+l[0]+"&travelmode=driving&waypoints="+l[1];
  if(l.length>=2){
