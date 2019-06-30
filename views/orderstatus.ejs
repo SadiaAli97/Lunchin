@@ -4,25 +4,34 @@
     <head>
         <title>LUNCHIN'</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/stylesheets/landing.css">
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
         <style type="text/css">
             body {
   background-color: #fff;
   background-image: url(https://userscontent2.emaze.com/images/81191429-0927-47ee-b09f-328c2e357da1/62ead03d2a9a1fdafa7be768efd3a411.jpg);
-  background-repeat:repeat;
-   height: 100%; 
-    
+  
+    height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  padding:50px;
   /* Center and scale the image nicely */
   
- 
+ .position1{
+     position:relative;
+     top:-100px;
+ }
   
 }
         </style>
+        
     </head>
     
     <body>
-        <div class="p">
+
  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
       <div class="container-fluid">
           <div class="navbar-header">
@@ -49,13 +58,21 @@
       </div>
     
 </nav>
-</div>
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<div class="container">
-<div class="row">
+
+<br/><br/><br/><br/>
+<div class="position1">
+ <div class="container">
+     
+     
+     
+     <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h1> My Orders </h1>
+        <h1 style="color:white"> My Orders </h1>
+       
+                      
+                       
+                       
         <% orders.forEach(function(orders){%>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -73,12 +90,13 @@
                 <ul class="list-group">
                   <li class="list-group-item"><%= orders.cart.totalPrice %> 
                    <span class="badge"><%= orders.ostatus %> </span></li> 
-                  
-                </ul>
               </div>
               </div>
             </div>
             <% }) %>
+            
+            
+            
     
             
          </div>
@@ -87,6 +105,7 @@
                   
     </div>
 </div>
-</div>        
+</div>  
+</div>
     </body>
 </html>

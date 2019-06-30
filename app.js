@@ -54,7 +54,14 @@ app.use(function(req,res,next){
     next();//its very imp so that this middleware will run for every route
 });
 
+var dishSchema = new mongoose.Schema({
+    name: String,
+    image: String,
+    price: String,
+    vegnveg:String
 
+});
+var newdish = mongoose.model("newdish", dishSchema);
 
 
 
@@ -63,7 +70,7 @@ app.get("/",function(req, res){
 });
 app.get("/cust_mainpage",function(req,res){
     
-    /*var today = new Date()
+   /* var today = new Date()
     var t=today.toLocaleString('en-US', {timeZone: "Asia/Kolkata"})
     //var t=new Date(Date.now()).toLocaleString();
     
@@ -88,45 +95,12 @@ app.get("/cust_mainpage",function(req,res){
             console.log(err);
         }
         else{
-            res.render("cust_mainpage",{newdish:alldishes});/*hours:hours,time:time});*/
+            console.log(alldishes)
+            res.render("cust_mainpage",{newdish:alldishes});
         }
     });
-});
-var dishSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    price: String
-
-});
-var newdish = mongoose.model("newdish", dishSchema);
-app.post("/Currentdishes",function(req,res){
-    
-    var name=req.body.name;
-    var image=req.body.image;
-    var price=req.body.price;
-    var dish={name:name,image:image,price:price}
-    newdish.create(dish,function(err, newlycreated){
-        if(err){
-            console.log(err);
-        } else {
-            res.redirect("/Currentdishes")
-        }
-    });
-    
 });
 
-app.get("/Currentdishes",function(req,res){
-    
-    newdish.find({},function(err,alldishes){
-        
-        if(err){
-            console.log(err);
-        }
-        else{
-            res.render("Currentdishes",{newdish:alldishes});
-        }
-    });
-});
 
 
 app.get("/add-to-cart/:id", function(req, res){

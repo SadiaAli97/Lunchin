@@ -83,7 +83,7 @@ body {
  <ul class="list-group">
  	<% products.forEach(function(products){%>
  <li class="list-group-item">
- <a href="/remove/<%= products.item._id %>" class="close"> &times</a>
+ <a href="/remove/<%= products.item._id %>" class="close"> &times</a> 
  <img src="<%= products.item.image%>" width=200>
  <strong> <%= products.item.name%> </strong>
  <span class="label label-success">₹ <%= products.price%></span>

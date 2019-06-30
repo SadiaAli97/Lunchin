@@ -24,8 +24,8 @@ var dispatched2= new Array()
 var dispatched3= new Array()
 
 
-//mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
- mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://mansirsetty:mansi4498@cluster0-ulqfu.mongodb.net/yelpcamp?retryWrites=true")
+// mongoose.connect("mongodb://localhost:27017/yelp_camp_v6",{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
@@ -57,16 +57,19 @@ app.use(function(req,res,next){
 var today = new Date()
     var t=today.toLocaleString('en-US', {timeZone: "Asia/Kolkata"})
     //var t=new Date(Date.now()).toLocaleString();
-    var time=t[19]
-    console.log(time)
+    
+    //console.log(time)
     if(t[12]!=":"){
+      var time=t[20]
       var str=t[11]+t[12]
       var hours=parseInt(str)
     }
     else{
+        var time=t[19]
         var str=t[11]
         var hours=parseInt(str)
     }
+    console.log(time)
     console.log(t)
     console.log(hours)
     
@@ -166,7 +169,7 @@ app.get("/chefp",function(req, res) {   //chef preparing
           console.log(order)
       }) 
     
-        res.render("chefp",{orders:orders,hours:hours});
+        res.render("chefp",{orders:orders,hours:hours,time:time});
     })
 })
 app.get("/changestatus",function(req,res){
@@ -191,7 +194,7 @@ app.get("/changestatus",function(req,res){
     //startalgo()
     
     }, 3000);
-        res.render("changestatus",{orders:orders,hours:hours});
+        res.render("changestatus",{orders:orders,hours:hours,time:time});
   });
 });
 app.get("/Currentdishes",function(req,res){
